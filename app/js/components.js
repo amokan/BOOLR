@@ -2047,6 +2047,43 @@ class DMux extends Component {
     }
 }
 
+class HalfAdder extends Component {
+    constructor(name,pos) {
+        super(name,pos,4,2,{ type: "char", text: "HalfAdder" });
+        this.addInputPort({ side: 3, pos: 0 }, "A");
+        this.addInputPort({ side: 3, pos: 1 }, "B");
+        this.addOutputPort({ side: 1, pos: 0 }, "Sum");
+        this.addOutputPort({ side: 1, pos: 1 }, "Carry");
+
+        this.function = function() {
+            this.output[0].value = this.input[0].value ^ this.input[1].value;
+            this.output[1].value = this.input[0].value & this.input[1].value;
+        }
+    }
+}
+
+class FullAdder extends Component {
+    constructor(name,pos) {
+        super(name,pos,4,3,{ type: "char", text: "FullAdder" });
+        this.addInputPort({ side: 3, pos: 0 }, "A");
+        this.addInputPort({ side: 3, pos: 1 }, "B");
+        this.addInputPort({ side: 3, pos: 2 }, "C");
+        this.addOutputPort({ side: 1, pos: 0 }, "Sum");
+        this.addOutputPort({ side: 1, pos: 1 }, "Carry");
+
+        this.function = function() {
+            let sum1 = this.input[1].value ^ this.input[2].value;
+            let carry1 = this.input[1].value & this.input[2].value;
+
+            let sum2 = this.input[0].value ^ sum1;
+            let carry2 = this.input[0].value & sum1;
+
+            this.output[0].value = sum2;
+            this.output[1].value = carry1 | carry2;
+        }
+    }
+}
+
 class Button extends Component {
     constructor(name,pos) {
         super(name,pos,2,1,{ type: "icon", text: "radio_button_checked" });
