@@ -329,9 +329,10 @@ c.onmousedown = function(e) {
             return false;
         }
         else {
-            if(document.getElementById("list").style.display != "none" || selecting) {
+            if(document.getElementById("list").style.display != "none" || document.getElementById("miscList").style.display != "none" || selecting) {
                 contextMenu.hide();
                 document.getElementById("list").hide();
+                document.getElementById("miscList").hide();
                 selecting = null;
             }
             else {

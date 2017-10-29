@@ -2,6 +2,7 @@ function select(Component) {
     Selected = Component;
     toolbar.message(`Selected ${Component.name} ${"gate"}`);
     document.getElementById("list").style.display = "none";
+    document.getElementById("miscList").style.display = "none";
 }
 
 const toolbar = document.getElementById("toolbar");
@@ -59,4 +60,40 @@ for(let i = 0; i < listItems.length; ++i) {
     listItems[i].onmouseenter = function() { this.style.background = "#222" };
     listItems[i].onmouseleave = function() { this.style.background = "#111" };
     listItems[i].onmouseup = function() { this.onclick() };
+}
+
+// Misc Component list
+const miscList = document.getElementById("miscList");
+miscList.show = function() {
+    miscList.style.display = "block";
+    setTimeout(() => {
+        miscList.style.opacity = 1;
+        miscList.style.transform = "scale(1)";
+    },1);
+}
+miscList.hide = function() {
+    miscList.style.opacity = 0;
+    miscList.style.transform = "scale(.5) translateX(-63px) translateY(150px)";
+    c.focus();
+    setTimeout(() => miscList.style.display = "none",200);
+}
+
+document.getElementsByClassName("slot")[1].onmousedown = function() {
+    document.getElementById("toolbartip").style.display = "none";
+    if(miscList.style.display == "none") miscList.show();
+    else miscList.hide();
+}
+document.getElementsByClassName("slot")[1].onmouseup = function() {
+    document.getElementsByClassName("slot")[1].focus();
+}
+
+document.getElementById("miscList").onblur = function() {
+    miscList.hide();
+}
+
+const miscListItems = document.getElementById("miscList").children;
+for(let i = 0; i < miscListItems.length; ++i) {
+    miscListItems[i].onmouseenter = function() { this.style.background = "#222" };
+    miscListItems[i].onmouseleave = function() { this.style.background = "#111" };
+    miscListItems[i].onmouseup = function() { this.onclick() };
 }

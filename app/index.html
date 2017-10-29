@@ -226,6 +226,7 @@
             <div id="toast"></div>
 
             <div class="slot" tooltip="Input and output ports">I/O</div>
+            <div class="slot" tooltip="Misc Components">Misc</div>
             <div class="slot" tooltip="NOT gate" onmousedown="event.which == 3 ? dialog.truthTable(NOT) : select(NOT)">!</div>
             <div class="slot" tooltip="AND gate" onmousedown="event.which == 3 ? dialog.truthTable(AND) : select(AND)">&</div>
             <div class="slot" tooltip="OR gate" onmousedown="event.which == 3 ? dialog.truthTable(OR) : select(OR)">|</div>
@@ -247,6 +248,11 @@
                 <li onclick="select(Counter)">Counter</li>
                 <li onclick="select(TimerStart)">TimerStart</li>
                 <li onclick="select(TimerEnd)">TimerEnd</li>
+            </ul>
+
+            <ul id="miscList" tabindex="1" style="display: none">
+                <li onclick="select(Mux)">Mux</li>
+                <li onclick="select(DMux)">DMux</li>
             </ul>
         </div>
         <div id="toolbartip"></div>

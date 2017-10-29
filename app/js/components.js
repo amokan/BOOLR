@@ -2009,6 +2009,44 @@ class XOR extends Component {
     }
 }
 
+class Mux extends Component {
+    constructor(name,pos) {
+        super(name,pos,2,3,{ type: "char", text: "Mux" });
+        this.addInputPort({ side: 3, pos: 0 }, "A");
+        this.addInputPort({ side: 3, pos: 1 }, "B");
+        this.addInputPort({ side: 3, pos: 2 }, "Select");
+        this.addOutputPort({ side: 1, pos: 0 }, "Out");
+
+        this.function = function() {
+            if(this.input[2].value) {
+                this.output[0].value = this.input[1].value;
+            } else {
+                this.output[0].value = this.input[0].value;
+            }
+        }
+    }
+}
+
+class DMux extends Component {
+    constructor(name,pos) {
+        super(name,pos,3,2,{ type: "char", text: "DMux" });
+        this.addInputPort({ side: 3, pos: 0 }, "In");
+        this.addInputPort({ side: 3, pos: 1 }, "Select");
+        this.addOutputPort({ side: 1, pos: 0 }, "A");
+        this.addOutputPort({ side: 1, pos: 1 }, "B");
+
+        this.function = function() {
+            if(this.input[1].value) {
+                this.output[0].value = 0;
+                this.output[1].value = this.input[0].value;
+            } else {
+                this.output[0].value = this.input[0].value;
+                this.output[1].value = 0;
+            }
+        }
+    }
+}
+
 class Button extends Component {
     constructor(name,pos) {
         super(name,pos,2,1,{ type: "icon", text: "radio_button_checked" });
